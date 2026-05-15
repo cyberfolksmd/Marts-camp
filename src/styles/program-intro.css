@@ -1,0 +1,11 @@
+.program-intro {
+  position: relative;
+  width: 100%;
+  line-height: 0;
+}
+
+.program-intro__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}

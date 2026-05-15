@@ -1,0 +1,452 @@
+/* Red parallax (адаптация red-paralax) — только внутри .hero-red-parallax */
+
+.hero-red-parallax {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-red-parallax__scene,
+.hero-red-parallax__layer {
+  display: block;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.hero-red-parallax__scene {
+  min-height: 360px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-red-parallax__layer {
+  position: absolute;
+}
+
+.hero-red-parallax__layer > div {
+  transform: translate3d(0, 0, 0);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.hero-red-parallax__background {
+  background: url('/red-paralax/images/background.jpg') no-repeat 50% 100%;
+  background-size: cover;
+  position: absolute;
+  width: 110%;
+  left: -5%;
+  top: -5%;
+  bottom: 96px;
+}
+
+.hero-red-parallax__lighthouse {
+  transform-origin: 50% 90%;
+  animation: hrp-lighthouse 4s 0.1s infinite alternate cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  margin: 0 -64px;
+  background: url('/red-paralax/images/lighthouse.png') no-repeat;
+  background-size: 128px 224px;
+  height: 224px;
+  width: 128px;
+  bottom: 64px;
+  position: absolute;
+  right: 20%;
+}
+
+.hero-red-parallax__wave {
+  background-repeat: repeat-x;
+  position: absolute;
+  width: 300%;
+  left: -100%;
+}
+
+.hero-red-parallax__wave::after {
+  background-color: #050a07;
+  position: absolute;
+  display: block;
+  content: '';
+  height: 500px;
+  width: 100%;
+  top: 100%;
+  left: 0;
+}
+
+.hero-red-parallax__wave--plain {
+  background-image: url('/red-paralax/images/wave-plain.png');
+}
+
+.hero-red-parallax__wave--paint {
+  background-image: url('/red-paralax/images/wave-paint.png');
+}
+
+.hero-red-parallax__wave--d30 {
+  animation: hrp-wave 7.11111s 0.1s infinite linear;
+  bottom: 100px;
+  background-position: center bottom;
+  background-size: auto 101%;
+  height: 48px;
+}
+.hero-red-parallax__wave--d30::after {
+  height: 112px;
+}
+
+.hero-red-parallax__wave--d40 {
+  animation: hrp-wave 6.66667s 0.1s infinite linear;
+  bottom: 80px;
+  background-position: center bottom;
+  background-size: auto 101%;
+  height: 64px;
+}
+.hero-red-parallax__wave--d40::after {
+  height: 96px;
+}
+
+.hero-red-parallax__wave--d50 {
+  animation: hrp-wave 6.22222s 0.1s infinite linear;
+  bottom: 60px;
+  background-position: center bottom;
+  background-size: auto 101%;
+  height: 80px;
+}
+.hero-red-parallax__wave--d50::after {
+  height: 80px;
+}
+
+.hero-red-parallax__wave--d60 {
+  animation: hrp-wave 5.77778s 0.1s infinite linear;
+  bottom: 40px;
+  background-position: center bottom;
+  background-size: auto 101%;
+  height: 96px;
+}
+.hero-red-parallax__wave--d60::after {
+  height: 64px;
+}
+
+.hero-red-parallax__wave--d80 {
+  animation: hrp-wave 4.88889s 0.1s infinite linear;
+  bottom: 0;
+  background-position: center bottom;
+  background-size: auto 101%;
+  height: 128px;
+}
+.hero-red-parallax__wave--d80::after {
+  height: 32px;
+}
+
+.hero-red-parallax__wave--d100 {
+  animation: hrp-wave 4s 0.1s infinite linear;
+  bottom: -40px;
+  background-position: center bottom;
+  background-size: auto 101%;
+  height: 160px;
+}
+.hero-red-parallax__wave--d100::after {
+  height: 0;
+}
+
+.hero-red-parallax__light {
+  margin: -120px -120px;
+  background-size: 240px 240px;
+  height: 240px;
+  width: 240px;
+  background-repeat: no-repeat;
+  bottom: 112px;
+  position: absolute;
+  left: 50%;
+}
+
+.hero-red-parallax__light--orange {
+  background-image: url('/red-paralax/images/light-orange.png');
+}
+
+.hero-red-parallax__light--purple {
+  background-image: url('/red-paralax/images/light-purple.png');
+}
+
+.hero-red-parallax__light--b {
+  bottom: 80px;
+  left: 30%;
+}
+.hero-red-parallax__light--c {
+  bottom: 112px;
+  left: 45%;
+}
+.hero-red-parallax__light--d {
+  bottom: 96px;
+  left: 60%;
+}
+
+.hero-red-parallax__phase-3 {
+  animation: hrp-phase 16s 0.1s infinite linear;
+}
+.hero-red-parallax__phase-4 {
+  animation: hrp-phase 14s 0.1s infinite linear;
+}
+.hero-red-parallax__phase-5 {
+  animation: hrp-phase 12s 0.1s infinite linear;
+}
+
+.hero-red-parallax__rope {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 120%;
+  position: relative;
+  left: -10%;
+}
+
+.hero-red-parallax__rope img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hero-red-parallax__hanger {
+  transform-origin: 0 0;
+  position: absolute;
+}
+
+.hero-red-parallax__hanger--1 {
+  top: 28%;
+  left: 10%;
+}
+.hero-red-parallax__hanger--2 {
+  top: 46%;
+  left: 20%;
+}
+.hero-red-parallax__hanger--3 {
+  top: 59%;
+  left: 30%;
+}
+.hero-red-parallax__hanger--4 {
+  top: 66.5%;
+  left: 40%;
+}
+.hero-red-parallax__hanger--5 {
+  top: 69.5%;
+  left: 50%;
+}
+.hero-red-parallax__hanger--6 {
+  top: 66.5%;
+  left: 60%;
+}
+.hero-red-parallax__hanger--8 {
+  top: 46%;
+  left: 80%;
+}
+
+.hero-red-parallax__board {
+  transform-origin: 50% 0;
+  margin: 0 -140px;
+  background-size: 280px 280px;
+  height: 280px;
+  width: 280px;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: -4px;
+  left: 0;
+}
+
+.hero-red-parallax__board--birds {
+  background-image: url('/red-paralax/images/board-birds.png');
+}
+.hero-red-parallax__board--cloud-1 {
+  background-image: url('/red-paralax/images/board-cloud-1.png');
+}
+.hero-red-parallax__board--cloud-2 {
+  background-image: url('/red-paralax/images/board-cloud-2.png');
+}
+.hero-red-parallax__board--cloud-3 {
+  background-image: url('/red-paralax/images/board-cloud-3.png');
+}
+.hero-red-parallax__board--cloud-4 {
+  background-image: url('/red-paralax/images/board-cloud-4.png');
+}
+
+.hero-red-parallax__swing-1 {
+  animation: hrp-swing 4s infinite alternate cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+.hero-red-parallax__swing-2 {
+  animation: hrp-swing 3.5s infinite alternate cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+.hero-red-parallax__swing-3 {
+  animation: hrp-swing 3s infinite alternate cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+.hero-red-parallax__swing-4 {
+  animation: hrp-swing 2.5s infinite alternate cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+.hero-red-parallax__swing-5 {
+  animation: hrp-swing 2s infinite alternate cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.hero-red-parallax__rope--depth-10 {
+  transform: scale(1);
+  top: 20%;
+}
+.hero-red-parallax__rope--depth-10 .hero-red-parallax__hanger {
+  transform: scale(0.25);
+}
+
+.hero-red-parallax__rope--depth-30 {
+  transform: scale(1.05556);
+  top: 13.33333%;
+}
+.hero-red-parallax__rope--depth-30 .hero-red-parallax__hanger {
+  transform: scale(0.30556);
+}
+
+.hero-red-parallax__rope--depth-60 {
+  transform: scale(1.13889);
+  top: 3.33333%;
+}
+.hero-red-parallax__rope--depth-60 .hero-red-parallax__hanger {
+  transform: scale(0.38889);
+}
+
+@keyframes hrp-phase {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  75% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hrp-wave {
+  0% {
+    transform: rotateZ(0deg) translate3d(0, 10%, 0) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg) translate3d(0, 10%, 0) rotateZ(-360deg);
+  }
+}
+
+@keyframes hrp-lighthouse {
+  0% {
+    transform: translate3d(15%, 0, 0) rotateZ(10deg);
+  }
+  100% {
+    transform: translate3d(-15%, 0, 0) rotateZ(-10deg);
+  }
+}
+
+@keyframes hrp-swing {
+  0% {
+    transform: rotateZ(10deg);
+  }
+  100% {
+    transform: rotateZ(-10deg);
+  }
+}
+
+@media (min-width: 400px) {
+  .hero-red-parallax__scene {
+    min-height: 360px;
+  }
+  .hero-red-parallax__rope--depth-10 {
+    top: 10%;
+  }
+  .hero-red-parallax__rope--depth-10 .hero-red-parallax__hanger {
+    transform: scale(0.3);
+  }
+  .hero-red-parallax__rope--depth-30 {
+    top: 2.22222%;
+  }
+  .hero-red-parallax__rope--depth-30 .hero-red-parallax__hanger {
+    transform: scale(0.36667);
+  }
+  .hero-red-parallax__rope--depth-60 {
+    top: -9.44444%;
+  }
+  .hero-red-parallax__rope--depth-60 .hero-red-parallax__hanger {
+    transform: scale(0.46667);
+  }
+}
+
+@media (min-width: 600px) {
+  .hero-red-parallax__lighthouse {
+    margin: 0 -96px;
+    background-size: 192px 336px;
+    height: 336px;
+    width: 192px;
+    bottom: 128px;
+  }
+
+  .hero-red-parallax__light {
+    margin: -140px -140px;
+    background-size: 280px 280px;
+    height: 280px;
+    width: 280px;
+  }
+
+  .hero-red-parallax__wave--d30 {
+    bottom: 150px;
+    height: 72px;
+  }
+  .hero-red-parallax__wave--d30::after {
+    height: 168px;
+  }
+
+  .hero-red-parallax__wave--d40 {
+    bottom: 120px;
+    height: 96px;
+  }
+  .hero-red-parallax__wave--d40::after {
+    height: 144px;
+  }
+
+  .hero-red-parallax__wave--d50 {
+    bottom: 90px;
+    height: 120px;
+  }
+  .hero-red-parallax__wave--d50::after {
+    height: 120px;
+  }
+
+  .hero-red-parallax__wave--d60 {
+    bottom: 60px;
+    height: 144px;
+  }
+  .hero-red-parallax__wave--d60::after {
+    height: 96px;
+  }
+
+  .hero-red-parallax__wave--d80 {
+    bottom: 0;
+    height: 192px;
+  }
+  .hero-red-parallax__wave--d80::after {
+    height: 48px;
+  }
+
+  .hero-red-parallax__wave--d100 {
+    bottom: -60px;
+    height: 240px;
+  }
+  .hero-red-parallax__wave--d100::after {
+    height: 0;
+  }
+
+  .hero-red-parallax__rope--depth-10 .hero-red-parallax__hanger {
+    transform: scale(0.5);
+  }
+  .hero-red-parallax__rope--depth-30 .hero-red-parallax__hanger {
+    transform: scale(0.61111);
+  }
+  .hero-red-parallax__rope--depth-60 .hero-red-parallax__hanger {
+    transform: scale(0.77778);
+  }
+}

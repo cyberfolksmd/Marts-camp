@@ -1,0 +1,188 @@
+@keyframes sticker-sway {
+  0%,
+  100% {
+    transform: rotate(-1.1deg) translateY(0);
+  }
+  50% {
+    transform: rotate(1.1deg) translateY(3px);
+  }
+}
+
+.stick-deco {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  line-height: 0;
+}
+
+.sticker-sway-wrap {
+  position: relative;
+  transform-origin: 50% 25%;
+  animation: sticker-sway 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticker-sway-wrap {
+    animation: none;
+    transform: rotate(-0.5deg);
+  }
+}
+
+.sticker-sway__img {
+  display: block;
+  width: clamp(64px, 7.5vw, 104px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
+}
+
+@media (min-width: 768px) {
+  .stickers-m-only {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .stickers-d-only {
+    display: none !important;
+  }
+
+  .stickers-m-only .sticker-sway__img {
+    width: clamp(36px, 10vw, 52px);
+  }
+}
+
+/* Расписание: только десктоп, по бокам */
+.schedule-stick-wrap {
+  position: relative;
+  width: 100%;
+  max-width: min(92%, 1200px);
+  margin-inline: auto;
+  margin-top: clamp(2rem, 6vw, 3.75rem);
+}
+
+.schedule-stick-wrap .schedule-bg-stack {
+  margin-top: 0;
+}
+
+.stick-deco.schedule-stick--left {
+  left: 0;
+  top: clamp(20%, 26vw, 36%);
+  transform: translateX(clamp(-42%, -5vw, -18%));
+}
+
+.stick-deco.schedule-stick--right {
+  right: 0;
+  top: clamp(24%, 28vw, 40%);
+  transform: translateX(clamp(18%, 5vw, 42%));
+}
+
+/* Программа над расписанием: только мобилка, по бокам */
+
+.program-intro .stick-deco {
+  z-index: 1;
+}
+
+.stick-deco.program-stick--left {
+  left: 0;
+  top: 50%;
+  transform: translate(clamp(-8%, -1vw, 0), -50%);
+}
+
+.stick-deco.program-stick--right {
+  right: 0;
+  top: 50%;
+  transform: translate(clamp(0, 1vw, 8%), -50%);
+}
+
+@media (max-width: 767px) {
+  .stick-deco.program-stick--left {
+    transform: translate(clamp(-6%, -1vw, 0), -50%);
+  }
+
+  .stick-deco.program-stick--right {
+    transform: translate(clamp(0, 1vw, 6%), -50%);
+  }
+}
+
+/* 5 фишек: по бокам; на мобиле меньше и выше/ниже */
+.benefits-section {
+  position: relative;
+  overflow: visible;
+}
+
+.stick-deco.benefits-stick--left,
+.stick-deco.benefits-stick--right {
+  z-index: 1;
+}
+
+.stick-deco.benefits-stick--left {
+  left: 0;
+  top: 44%;
+  transform: translateX(clamp(-36%, -4vw, -12%));
+}
+
+.stick-deco.benefits-stick--right {
+  right: 0;
+  top: 44%;
+  transform: translateX(clamp(12%, 4vw, 36%));
+}
+
+@media (max-width: 767px) {
+  .stick-deco.benefits-stick--left {
+    top: 14%;
+    transform: translateX(clamp(-28%, -2vw, -8%));
+  }
+
+  .stick-deco.benefits-stick--right {
+    top: 58%;
+    transform: translateX(clamp(8%, 2vw, 28%));
+  }
+}
+
+/* Подвал */
+.footer {
+  position: relative;
+  overflow: visible;
+}
+
+.footer__grid,
+.footer__credit-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.stick-deco.footer-sticker {
+  z-index: 2;
+}
+
+/* Только десктоп: слева от заголовка отдела продаж, чуть ниже */
+.stick-deco.footer-stick--sales-title {
+  left: 0;
+  top: 0.58rem;
+  transform: translateX(calc(-100% - 0.7rem));
+}
+
+.stick-deco.footer-stick--d1 {
+  left: clamp(0.15rem, 1.5vw, 1rem);
+  bottom: clamp(2.35rem, 5.5vw, 3.25rem);
+  transform: translateX(-15%);
+}
+
+.stick-deco.footer-stick--d2 {
+  right: clamp(0.15rem, 1.5vw, 1rem);
+  bottom: clamp(2.25rem, 5vw, 3.1rem);
+  transform: translateX(15%);
+}
+
+.stick-deco.footer-stick--m1 {
+  left: clamp(0.1rem, 1.5vw, 0.6rem);
+  bottom: clamp(1.65rem, 4.5vw, 2.35rem);
+  transform: translateX(-10%);
+}
+
+.stick-deco.footer-stick--m2 {
+  right: clamp(0.1rem, 1.5vw, 0.6rem);
+  bottom: clamp(1.65rem, 4.5vw, 2.35rem);
+  transform: translateX(10%);
+}

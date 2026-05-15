@@ -1,0 +1,60 @@
+.btn-primary {
+  padding: 0.95rem 1.75rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #e8c547, var(--gold) 40%, var(--gold-deep));
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow:
+    0 3px 0 #6a5220,
+    0 8px 24px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow:
+    0 3px 0 #6a5220,
+    0 12px 32px rgba(212, 175, 55, 0.35);
+}
+
+.btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.btn-primary--nav {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.85rem;
+  border-radius: 10px;
+}
+
+.btn-secondary {
+  padding: 0.95rem 1.75rem;
+  border-radius: 12px;
+  border: 2px solid rgba(212, 175, 55, 0.55);
+  background: rgba(10, 22, 16, 0.5);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: var(--gold);
+}
