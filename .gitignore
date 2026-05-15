@@ -1,0 +1,23 @@
+# --- Не коммитить: зависимости и сборка ---
+node_modules/
+**/node_modules/
+
+dist/
+**/dist/
+
+# --- Секреты (в репозитории оставляйте .env.example) ---
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# --- Кэш и логи ---
+*.log
+npm-debug.log*
+.vite/
+.cache/
+
+# --- ОС ---
+.DS_Store
+Thumbs.db
