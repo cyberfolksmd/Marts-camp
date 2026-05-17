@@ -76,6 +76,8 @@ const ru = {
     sending: 'Отправка...',
     errorSend: 'Ошибка отправки',
     errorServer: 'Ошибка сервера',
+    consentLabel: 'Я согласен на обработку моих данных',
+    policyModalAria: 'Политика обработки персональных данных',
   },
   successModal: {
     close: 'Закрыть',
@@ -165,6 +167,8 @@ const ro = {
     sending: 'Se trimite...',
     errorSend: 'Eroare la trimitere',
     errorServer: 'Eroare de server',
+    consentLabel: 'Sunt de acord cu prelucrarea datelor mele',
+    policyModalAria: 'Politica de prelucrare a datelor cu caracter personal',
   },
   successModal: {
     close: 'Închide',

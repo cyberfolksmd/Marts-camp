@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import ContactSuccessModal from './ContactSuccessModal'
+import PrivacyPolicyModal from './PrivacyPolicyModal'
 import { useLanguage } from '../i18n/LanguageContext.jsx'
 import '../styles/success-modal.css'
+import '../styles/policy-modal.css'
 
 export default function CTAForm() {
   const { lang, m } = useLanguage()
@@ -9,9 +11,12 @@ export default function CTAForm() {
   const panelBg = lang === 'ro' ? '/assets/bg_form_ro.png' : '/assets/bg_form_ru.png'
   const [loading, setLoading] = useState(false)
   const [successOpen, setSuccessOpen] = useState(false)
+  const [policyOpen, setPolicyOpen] = useState(false)
+  const [consent, setConsent] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!consent) return
 
     setLoading(true)
 
@@ -34,6 +39,7 @@ export default function CTAForm() {
 
       if (res.ok) {
         e.target.reset()
+        setConsent(false)
         setSuccessOpen(true)
       } else {
         alert(c.errorSend)
@@ -48,6 +54,7 @@ export default function CTAForm() {
   return (
     <section className="cta-form" id="contact" aria-label={c.title}>
       <ContactSuccessModal open={successOpen} onClose={() => setSuccessOpen(false)} />
+      <PrivacyPolicyModal open={policyOpen} onClose={() => setPolicyOpen(false)} />
 
       <div className="container">
         <div className="cta-form__panel">
@@ -63,7 +70,39 @@ export default function CTAForm() {
                 <option value="9-13">{c.age913}</option>
               </select>
 
-              <button className="btn-primary" disabled={loading} type="submit">
+              <div className="cta-form__consent">
+                <label className="cta-form__consent-toggle">
+                  <input
+                    type="checkbox"
+                    name="consent"
+                    className="cta-form__consent-input"
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    aria-label={c.consentLabel}
+                  />
+                  <span className="cta-form__consent-box" aria-hidden="true" />
+                </label>
+                <span
+                  role="button"
+                  tabIndex={0}
+                  className="cta-form__consent-link"
+                  onClick={() => setPolicyOpen(true)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      setPolicyOpen(true)
+                    }
+                  }}
+                >
+                  {c.consentLabel}
+                </span>
+              </div>
+
+              <button
+                className="btn-primary"
+                disabled={loading || !consent}
+                type="submit"
+              >
                 {loading ? c.sending : c.submit}
               </button>
             </form>
