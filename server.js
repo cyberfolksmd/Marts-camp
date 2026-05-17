@@ -7,10 +7,11 @@ import pg from 'pg'
 import session from 'express-session'
 import XLSX from 'xlsx'
 
-dotenv.config()
-
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+
+// Всегда .env рядом с server.js; override — чтобы значения из файла побеждали устаревший env (systemd/shell).
+dotenv.config({ path: path.join(__dirname, '.env'), override: true })
 
 const app = express()
 const PORT = Number(process.env.PORT) || 3000

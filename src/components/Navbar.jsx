@@ -32,8 +32,15 @@ export default function Navbar() {
           <span className="navbar-burger__bar" aria-hidden="true" />
         </button>
 
-        <a href="#top" className="logo logo--stacked">
-          <span className="logo__main">{m.nav.logoMain}</span>
+        <a href="#top" className="logo logo--brand" aria-label={`${m.nav.logoMain}. ${m.nav.logoSub}`}>
+          <img
+            src="/assets/logo-kids.png"
+            alt=""
+            className="logo__img"
+            width={120}
+            height={44}
+            loading="eager"
+          />
           <span className="logo__sub">{m.nav.logoSub}</span>
         </a>
 

@@ -4,8 +4,17 @@
   line-height: 0;
 }
 
+/* Как блок таблиц расписания: до 900px — на всю ширину контента, от 900px — min(92%, 1200px) */
 .program-intro__img {
   display: block;
   width: 100%;
   height: auto;
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+@media (min-width: 900px) {
+  .program-intro__img {
+    width: min(92%, 1200px);
+  }
 }

@@ -34,9 +34,21 @@ export default function Home() {
         <Sticker index={1} className="schedule-stick--left stickers-d-only" delaySec={0} />
         <Sticker index={2} className="schedule-stick--right stickers-d-only" delaySec={0.45} />
         <div className="schedule-bg-stack">
-          <WeekSection id="week1" meta={s.week1.meta} days={s.week1.days} labels={m.schedule} />
+          <WeekSection
+            id="week1"
+            weekIndex={1}
+            meta={s.week1.meta}
+            days={s.week1.days}
+            labels={m.schedule}
+          />
 
-          <WeekSection id="week2" meta={s.week2.meta} days={s.week2.days} labels={m.schedule} />
+          <WeekSection
+            id="week2"
+            weekIndex={2}
+            meta={s.week2.meta}
+            days={s.week2.days}
+            labels={m.schedule}
+          />
         </div>
       </div>
 

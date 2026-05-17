@@ -39,7 +39,7 @@
 /* Одинаковая ширина карточек, без масштаба — ровная сетка */
 .schedule-bg-stack .week-section:first-of-type .schedule-card,
 .schedule-bg-stack .week-section:last-of-type .schedule-card {
-  max-width: min(100%, 920px);
+  max-width: min(100%, 1080px);
   width: 100%;
   margin-inline: auto;
   transform: none;
@@ -84,6 +84,14 @@
 .schedule-bg-stack .week-section .schedule-table th,
 .schedule-bg-stack .week-section .schedule-table td {
   padding: 0.48rem 0.6rem 0.4rem;
+}
+
+.schedule-bg-stack .week-section .schedule-table__row-theme td.schedule-table__theme {
+  padding: 0.35rem 0.45rem 0;
+}
+
+.schedule-bg-stack .week-section .schedule-table__row-theme th.schedule-table__row-label {
+  padding: 0.55rem 0.6rem 0.35rem;
 }
 
 .schedule-bg-stack .week-section .schedule-table__day-full {
@@ -153,11 +161,11 @@
   --schedule-bordeaux: #4a1522;
   --schedule-bordeaux-deep: #361018;
   border-radius: 16px;
-  overflow: hidden;
+  overflow: visible;
   border: none;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
   background: var(--parchment);
-  max-width: min(100%, 920px);
+  max-width: min(100%, 1080px);
   margin-inline: auto;
 }
 
@@ -191,28 +199,42 @@
 
 .schedule-table-wrap {
   overflow-x: auto;
+  overflow-y: visible;
   -webkit-overflow-scrolling: touch;
   background: linear-gradient(180deg, var(--parchment) 0%, #ebe0cc 100%);
 }
 
 .schedule-table {
+  --schedule-sticker-size: clamp(84px, 17vw, 128px);
+  --schedule-col-label: 7.25rem;
   width: 100%;
-  min-width: 680px;
-  border-collapse: collapse;
+  min-width: 1080px;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
   color: var(--ink);
   font-family: 'DM Sans', system-ui, sans-serif;
   font-size: 0.88rem;
 }
 
+.schedule-table__col-corner {
+  width: var(--schedule-col-label);
+}
+
+/* Все дни — одинаковая ширина; иначе «узкие» колонки сжимают стикер через max-width */
+.schedule-table__col-day {
+  width: calc((100% - var(--schedule-col-label)) / 5);
+}
+
 .schedule-table th,
 .schedule-table td {
   border: 1px solid rgba(74, 67, 56, 0.2);
-  padding: 0.75rem 0.6rem;
+  padding: 0.75rem 0.72rem;
   vertical-align: top;
 }
 
 .schedule-table__corner {
-  width: 6.5rem;
+  width: var(--schedule-col-label);
   background: linear-gradient(135deg, var(--parchment-dark), var(--parchment));
 }
 
@@ -242,7 +264,7 @@
 }
 
 .schedule-table__row-label {
-  width: 6.5rem;
+  width: var(--schedule-col-label);
   text-align: left;
   background: linear-gradient(90deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.05));
   font-family: 'Cinzel', serif;
@@ -263,16 +285,61 @@
   letter-spacing: 0.02em;
 }
 
-.schedule-table__row-label--scout {
-  background: linear-gradient(90deg, rgba(74, 21, 34, 0.08), transparent);
+.schedule-table__row-band th {
+  padding: 0.55rem 0.75rem;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.78rem, 2vw, 0.92rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-align: center;
+  color: var(--schedule-bordeaux-deep);
+  border: 1px solid rgba(74, 67, 56, 0.2);
 }
 
-.schedule-table__row-label--ranger {
-  background: linear-gradient(90deg, rgba(74, 21, 34, 0.1), transparent);
+.schedule-table__row-band--junior th {
+  position: relative;
+  z-index: 3;
+  padding-top: 0.6rem;
+  background: #fff2cc;
+}
+
+.schedule-table__band-text {
+  position: relative;
+  z-index: 2;
+}
+
+.schedule-table__row-band--pro th {
+  background: #c6e0b4;
+}
+
+.schedule-table__band-age {
+  display: inline-block;
+  margin-left: 0.45rem;
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ribbon);
+  opacity: 1;
+}
+
+.schedule-table__row-label--junior {
+  background: linear-gradient(90deg, rgba(255, 242, 204, 0.95), rgba(255, 242, 204, 0.35));
+}
+
+.schedule-table__row-label--pro {
+  background: linear-gradient(90deg, rgba(198, 224, 180, 0.95), rgba(198, 224, 180, 0.35));
 }
 
 .schedule-table__row-theme .schedule-table__row-label {
   background: linear-gradient(90deg, rgba(154, 120, 47, 0.25), rgba(212, 175, 55, 0.08));
+  padding-top: 0.55rem;
+  vertical-align: top;
+}
+
+.schedule-table__row-theme td,
+.schedule-table__row-theme th {
+  overflow: visible;
 }
 
 .schedule-table__theme {
@@ -283,7 +350,118 @@
   text-align: center;
   color: var(--ink);
   background: rgba(255, 255, 255, 0.35);
-  line-height: 1.4;
+  line-height: 1.32;
+  hyphens: none;
+  word-break: normal;
+  padding: 0.35rem 0.45rem 0;
+  overflow: visible;
+  vertical-align: top;
+}
+
+.schedule-table__theme--twoline {
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+  line-height: 1.26;
+  padding-inline: 0.35rem;
+}
+
+.schedule-table__theme--threeline {
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  padding-inline: 0.35rem;
+}
+
+.schedule-table__theme--threeline .schedule-table__theme-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.06rem;
+  line-height: 1.08;
+}
+
+.schedule-table__theme--threeline .schedule-table__theme-line {
+  display: block;
+  line-height: 1.08;
+}
+
+.schedule-table__theme--threeline br {
+  display: none;
+}
+
+/* Тема → сразу стикер (без огромного зазора); стикер не наезжает на текст MARTS SCOUTS */
+.schedule-table__row-theme .schedule-table__theme-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.32rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.schedule-table__theme-body {
+  flex: 0 0 auto;
+  width: 100%;
+  margin: 0;
+}
+
+.schedule-table__theme-line {
+  display: inline;
+  white-space: nowrap;
+}
+
+.schedule-table__theme-art {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+  line-height: 0;
+}
+
+.schedule-table__theme-sticker {
+  display: block;
+  flex-shrink: 0;
+  width: var(--schedule-sticker-size);
+  height: auto;
+  max-width: none;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 10px rgba(54, 16, 24, 0.12));
+}
+
+/* Неделя 1: выровнять стикеры однострочных/пиратов с «УНИВЕРСИТЕТ МОНСТРОВ» */
+.schedule-table__theme--w1-drop .schedule-table__theme-art {
+  margin-top: 1.2rem;
+}
+
+.schedule-table__theme--w1-drop-twoline .schedule-table__theme-art {
+  margin-top: 0.4rem;
+}
+
+.schedule-table__theme--w1-drop-threeline .schedule-table__theme-art {
+  margin-top: 0.28rem;
+}
+
+.schedule-table__theme--w1-lg .schedule-table__theme-sticker {
+  width: calc(var(--schedule-sticker-size) * 1.08);
+}
+
+.schedule-table__theme--w1-lg-sm .schedule-table__theme-sticker {
+  width: calc(var(--schedule-sticker-size) * 1.05);
+}
+
+/* Неделя 2: «ЗВЕРОПОЛИС» — крупнее и на уровне «ГАРРИ ПОТТЕР» */
+.schedule-table__theme--w2-drop .schedule-table__theme-art {
+  margin-top: 0.85rem;
+}
+
+.schedule-table__theme--w2-lg .schedule-table__theme-sticker {
+  width: calc(var(--schedule-sticker-size) * 1.08);
 }
 
 .schedule-table__cell {
@@ -293,10 +471,28 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
+.schedule-table__row-junior td.schedule-table__cell,
+.schedule-table__row-pro td.schedule-table__cell {
+  font-weight: 700;
+}
+
+.schedule-table__cell--junior {
+  background: rgba(255, 242, 204, 0.42);
+}
+
+.schedule-table__cell--pro {
+  background: rgba(198, 224, 180, 0.42);
+}
+
 @media (min-width: 900px) {
   .schedule-table {
-    min-width: 760px;
+    min-width: 900px;
     font-size: 0.95rem;
+  }
+
+  .schedule-table th,
+  .schedule-table td {
+    padding: 0.55rem 0.85rem;
   }
 
   .schedule-table__theme {
@@ -333,6 +529,14 @@
     padding: 0.58rem 0.75rem 0.46rem;
   }
 
+  .schedule-bg-stack .week-section .schedule-table__row-theme td.schedule-table__theme {
+    padding: 0.35rem 0.45rem 0;
+  }
+
+  .schedule-bg-stack .week-section .schedule-table__row-theme th.schedule-table__row-label {
+    padding: 0.55rem 0.75rem 0.35rem;
+  }
+
   .schedule-bg-stack .week-section:last-of-type .schedule-table tbody tr:last-child th,
   .schedule-bg-stack .week-section:last-of-type .schedule-table tbody tr:last-child td {
     padding-bottom: 0.34rem;
@@ -350,7 +554,7 @@
   }
 
   .schedule-table {
-    min-width: 646px;
+    min-width: calc(646px + 3ch);
   }
 
   .schedule-table-wrap {
@@ -408,14 +612,19 @@
     margin-top: clamp(2.25rem, 7.5vw, 4rem);
   }
 
+  .schedule-table {
+    --schedule-col-label: calc(5.25rem + 3ch);
+    min-width: calc(780px + 3ch);
+  }
+
   .schedule-bg-stack .schedule-table {
-    min-width: 720px;
+    min-width: calc(780px + 3ch);
     font-size: 0.82rem;
   }
 
   .schedule-bg-stack .schedule-table__corner,
   .schedule-bg-stack .schedule-table__row-label {
-    width: 4.75rem;
+    width: var(--schedule-col-label);
   }
 
   .schedule-bg-stack .schedule-table__row-label {
@@ -438,11 +647,90 @@
     line-height: 1.15;
   }
 
+  .schedule-table {
+    --schedule-sticker-size: clamp(70px, 19vw, 102px);
+    min-width: calc(860px + 3ch);
+  }
+
+  /* 1-я неделя: ПИРАТЫ шире, КИНОМАНИЯ уже — без уменьшения шрифта */
+  .schedule-table--week1 {
+    --schedule-day-col: calc((100% - var(--schedule-col-label)) / 5);
+    --schedule-pirates-extra: 1ch;
+    --schedule-from-cinema: 1.3ch;
+    --schedule-day-shrink: calc(
+      (var(--schedule-pirates-extra) + var(--schedule-from-cinema)) / 3
+    );
+  }
+
+  .schedule-table--week1 .schedule-table__col-day--shrink {
+    width: calc(var(--schedule-day-col) - var(--schedule-day-shrink));
+  }
+
+  .schedule-table--week1 .schedule-table__col-day--pirates {
+    width: calc(
+      var(--schedule-day-col) + var(--schedule-pirates-extra) + var(--schedule-from-cinema)
+    );
+  }
+
+  .schedule-table--week1 .schedule-table__col-day--kinomania {
+    width: calc(var(--schedule-day-col) - var(--schedule-from-cinema));
+  }
+
+  @media (max-width: 480px) {
+    .schedule-table--week1 {
+      --schedule-from-cinema: 1.6ch;
+      --schedule-pirates-extra: 1.15ch;
+    }
+  }
+
   .schedule-bg-stack .week-section .schedule-table__theme {
     font-size: 0.8rem;
-    line-height: 1.25;
-    word-break: break-word;
-    hyphens: auto;
+    line-height: 1.28;
+    word-break: normal;
+    hyphens: none;
+  }
+
+  .schedule-table__theme--twoline {
+    font-size: 0.72rem;
+  }
+
+  .schedule-table__theme--threeline {
+    font-size: 0.72rem;
+    line-height: 1.08;
+  }
+
+  .schedule-table__theme--threeline .schedule-table__theme-body {
+    gap: 0.04rem;
+  }
+
+  .schedule-table__theme--pirates .schedule-table__theme-body {
+    text-align: center;
+  }
+
+  .schedule-table__theme--pirates .schedule-table__theme-line {
+    display: block;
+    text-align: center;
+    margin-inline: auto;
+  }
+
+  .schedule-table__theme--w1-drop .schedule-table__theme-art {
+    margin-top: 0.95rem;
+  }
+
+  .schedule-table__theme--w1-drop-twoline .schedule-table__theme-art {
+    margin-top: 0.3rem;
+  }
+
+  .schedule-table__theme--w1-drop-threeline .schedule-table__theme-art {
+    margin-top: 0.22rem;
+  }
+
+  .schedule-table__theme--w2-drop .schedule-table__theme-art {
+    margin-top: 0.65rem;
+  }
+
+  .schedule-table__row-band--junior th {
+    padding-top: 0.5rem;
   }
 
   .schedule-bg-stack .week-section .schedule-table__cell {
@@ -464,7 +752,15 @@
 
   .schedule-bg-stack .week-section .schedule-table th,
   .schedule-bg-stack .week-section .schedule-table td {
-    padding: 0.34rem 0.42rem 0.3rem;
+    padding: 0.28rem 0.42rem 0.24rem;
+  }
+
+  .schedule-bg-stack .week-section .schedule-table__row-theme td.schedule-table__theme {
+    padding: 0.3rem 0.42rem 0;
+  }
+
+  .schedule-bg-stack .week-section .schedule-table__row-theme th.schedule-table__row-label {
+    padding: 0.45rem 0.42rem 0.28rem;
   }
 
   .schedule-bg-stack .week-section:last-of-type .schedule-table tbody tr:last-child th,

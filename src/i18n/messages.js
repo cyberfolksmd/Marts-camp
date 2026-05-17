@@ -3,7 +3,7 @@
 const ru = {
   nav: {
     logoMain: 'MARTS FITNESS',
-    logoSub: 'Лето на драйве',
+    logoSub: 'Лето на драйве!',
     program: 'Программа',
     week1: 'Неделя 1',
     week2: 'Неделя 2',
@@ -42,17 +42,19 @@ const ru = {
     highlights: [
       { text: 'Самооборона и безопасность на перекрёстках.' },
       { text: 'Фитнес-прокачка: квесты и тренировки «Выживание».' },
-      { text: 'Полезные полдники от кондитерской «Марципан».' },
+      { text: 'Перекус чемпиона: топливо для юных героев.' },
       { text: 'Марц-коины: игровая валюта за активность.' },
       { text: 'Крутые призы: от браслетов до кроссовок и скидки 15% на абонемент для мамы!' },
     ],
   },
   schedule: {
     themeRow: 'Тема дня',
-    scouts: 'MARTS SCOUTS',
-    rangers: 'MARTS RANGERS',
-    ageScouts: '5–8 лет',
-    ageRangers: '9–13 лет',
+    juniorGroup: 'MARTS SCOUTS',
+    proGroup: 'MARTS RANGERS',
+    ageJunior: '5–8 лет',
+    agePro: '9–13 лет',
+    artRow: 'АРТ КЛАСС',
+    gamesRow: 'ПОДВИЖНЫЕ ИГРЫ',
   },
   footer: {
     title: 'Лето на драйве!',
@@ -129,17 +131,19 @@ const ro = {
     highlights: [
       { text: 'Autoapărare și siguranță la treceri complicate.' },
       { text: 'Fitness intens: questuri și antrenamentul „Supraviețuire”.' },
-      { text: 'Gustări sănătoase de la cofetăria „Marțipan”.' },
+      { text: 'Gustarea campionului: combustibil pentru tinerii eroi.' },
       { text: 'Marț-coinuri: monedă de joc pentru activitate.' },
       { text: 'Premii tari: de la brățări la adidași și 15% reducere la abonament pentru mamă!' },
     ],
   },
   schedule: {
     themeRow: 'Tema zilei',
-    scouts: 'MARTS SCOUTS',
-    rangers: 'MARTS RANGERS',
-    ageScouts: '5–8 ani',
-    ageRangers: '9–13 ani',
+    juniorGroup: 'MARTS SCOUTS',
+    proGroup: 'MARTS RANGERS',
+    ageJunior: '5–8 ani',
+    agePro: '9–13 ani',
+    artRow: 'ARTĂ',
+    gamesRow: 'JOCURI DINAMICE',
   },
   footer: {
     title: 'Vară pe drive!',

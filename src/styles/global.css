@@ -159,6 +159,41 @@ body::before {
   line-height: 1.15;
 }
 
+.logo--brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.22rem;
+  line-height: 1.1;
+  text-align: center;
+  text-shadow: none;
+  max-width: min(118px, 34vw);
+}
+
+.logo--brand .logo__img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: clamp(32px, 8vw, 40px);
+  object-fit: contain;
+  filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.25));
+}
+
+.logo--brand .logo__sub {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.5rem, 1.45vw, 0.62rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-shadow: 0 0 14px var(--gold-glow);
+  white-space: nowrap;
+}
+
 .logo__main {
   font-size: clamp(0.78rem, 2.2vw, 0.95rem);
   letter-spacing: 0.1em;
@@ -225,8 +260,24 @@ body::before {
     text-align: center;
   }
 
-  .navbar .logo--stacked {
+  .navbar .logo--stacked,
+  .navbar .logo--brand {
     align-items: center;
+    justify-self: center;
+  }
+
+  .navbar .logo--brand .logo__img {
+    max-height: 34px;
+    max-width: min(100px, 32vw);
+  }
+
+  .navbar .logo--brand {
+    max-width: min(100px, 32vw);
+  }
+
+  .navbar .logo--brand .logo__sub {
+    font-size: clamp(0.48rem, 2.4vw, 0.56rem);
+    letter-spacing: 0.08em;
   }
 
   .navbar-actions {
