@@ -1,7 +1,7 @@
 /** Расписание по языкам — структура как в таблице лагеря (тема дня + арт/игры по группам) */
 
 const week1Ru = {
-  meta: { title: 'ПЕРВАЯ НЕДЕЛЯ', variant: 'blue' },
+  meta: { title: 'НЕДЕЛЯ 1: ОТ ГОЛОВОЛОМОК ДО КИНОПРЕМИИ!', variant: 'blue' },
   days: [
     {
       dayShort: 'ПН',
@@ -42,7 +42,7 @@ const week1Ru = {
 }
 
 const week2Ru = {
-  meta: { title: 'ВТОРАЯ НЕДЕЛЯ', variant: 'purple' },
+  meta: { title: 'НЕДЕЛЯ 2: ПОГРУЖЕНИЕ В КУЛЬТОВЫЕ МИРЫ!', variant: 'purple' },
   days: [
     {
       dayShort: 'ПН',
@@ -89,7 +89,7 @@ const week2Ru = {
 }
 
 const week1Ro = {
-  meta: { title: 'SĂPTĂMÂNA 1', variant: 'blue' },
+  meta: { title: 'SĂPTĂMÂNA 1: DE LA PUZZLE-URI LA PREMIERA DE FILM!', variant: 'blue' },
   days: [
     {
       dayShort: 'Lu',
@@ -130,7 +130,7 @@ const week1Ro = {
 }
 
 const week2Ro = {
-  meta: { title: 'SĂPTĂMÂNA 2', variant: 'purple' },
+  meta: { title: 'SĂPTĂMÂNA 2: ÎN LUMI LEGENDARE!', variant: 'purple' },
   days: [
     {
       dayShort: 'Lu',
