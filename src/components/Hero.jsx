@@ -1,18 +1,19 @@
+import { useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext.jsx'
 import HeroParallaxScene from './HeroParallaxScene'
+import RatingModal from './RatingModal.jsx'
 import '../styles/hero-red-parallax.css'
 
 export default function Hero() {
   const { lang, m } = useLanguage()
-
-  const goProgram = () => {
-    document.getElementById('program-intro')?.scrollIntoView({ behavior: 'smooth' })
-  }
+  const [ratingOpen, setRatingOpen] = useState(false)
 
   const heroH1Src = lang === 'ro' ? '/assets/hero_h1_ro.png' : '/assets/hero_h1.png'
 
   return (
     <section className="hero" id="top">
+      <RatingModal open={ratingOpen} onClose={() => setRatingOpen(false)} />
+      
       <div className="hero-red-parallax" aria-hidden="true">
         <HeroParallaxScene />
       </div>
@@ -38,7 +39,7 @@ export default function Hero() {
         <p className="hero-ribbon">{m.hero.ribbon}</p>
 
         <div className="hero-buttons">
-          <button type="button" className="btn-secondary" onClick={goProgram}>
+          <button type="button" className="btn-secondary" onClick={() => setRatingOpen(true)}>
             {m.hero.viewProgram}
           </button>
           <a className="btn-primary" href="#contact">

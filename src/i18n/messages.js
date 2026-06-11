@@ -9,7 +9,7 @@ const ru = {
     week2: 'Неделя 2',
     benefits: '5 фишек',
     contact: 'Контакты',
-    signup: 'Записаться',
+    signup: 'Войти в Аккаунт',
     navAria: 'Основная навигация',
     menuOpenAria: 'Открыть меню',
     menuCloseAria: 'Закрыть меню',
@@ -28,7 +28,7 @@ const ru = {
     factFormat: 'Формат:',
     factFormatText: 'Фитнес + Безопасность + Творчество.',
     signup: 'Записаться',
-    viewProgram: 'Смотреть программу',
+    viewProgram: 'Рейтинг',
     booking: 'Бронь мест:',
     addressLabel: 'Адрес:',
     sep: '|',
@@ -89,6 +89,92 @@ const ru = {
     limited: 'Места ограничены',
     operator: 'Оператор',
   },
+  gamification: {
+    login: {
+      title: 'Вход в MARTS CAMP',
+      sub: 'Система геймификации детского лагеря',
+      user: 'Имя пользователя (Логин)',
+      pass: 'Пароль (или PIN)',
+      btn: 'Войти',
+      error: 'Неверный логин или пароль',
+      childHint: 'Дети входят по логину (напр. child1) и PIN-коду (напр. 1111)'
+    },
+    roles: {
+      admin: 'Супер-админ',
+      counselor: 'Вожатый',
+      parent: 'Родитель',
+      child: 'Ребенок'
+    },
+    child: {
+      balance: 'Баланс коинов',
+      ageGroup: 'Группа',
+      history: 'История достижений',
+      shop: 'Магазин призов',
+      reserve: 'Забронировать',
+      reserved: 'Забронировано',
+      noStock: 'Нет в наличии',
+      successReserve: 'Товар успешно забронирован! Заберите его в фитнес-клубе.',
+      noCoins: 'Недостаточно MARTS коинов!'
+    },
+    parent: {
+      title: 'Кабинет родителя',
+      childCoins: 'Баланс ребенка',
+      childHistory: 'История начислений',
+      childOrders: 'Забронированные призы',
+      noChildren: 'К вашему аккаунту не привязаны дети. Обратитесь к администратору.'
+    },
+    counselor: {
+      title: 'Кабинет вожатого',
+      allGroups: 'Все группы',
+      scouts: 'MARTS SCOUTS (5-8 лет)',
+      rangers: 'MARTS RANGERS (9-13 лет)',
+      awardTitle: 'Начислить коины',
+      selectChild: 'Выберите одного или нескольких детей из списка слева',
+      selectCriterion: 'Выберите критерий начисления:',
+      comment: 'Добавить комментарий (напр. за помощь на Арт-классе)',
+      awardBtn: 'Начислить коины',
+      success: 'Коины успешно начислены!'
+    },
+    admin: {
+      title: 'Панель администратора',
+      tabs: {
+        users: 'Пользователи',
+        store: 'Магазин призов',
+        orders: 'Заказы',
+        ledger: 'Лог транзакций',
+        seller: 'Выдача призов'
+      },
+      users: {
+        addBtn: 'Добавить пользователя',
+        username: 'Логин',
+        name: 'Имя',
+        role: 'Роль',
+        parent: 'Родитель',
+        group: 'Группа',
+        actions: 'Действия',
+        save: 'Сохранить',
+        cancel: 'Отмена'
+      },
+      store: {
+        addBtn: 'Добавить товар',
+        title: 'Название',
+        price: 'Цена (коины)',
+        stock: 'Остаток'
+      },
+      orders: {
+        child: 'Ребенок',
+        item: 'Приз',
+        price: 'Цена',
+        status: 'Статус',
+        actions: 'Действия',
+        approve: 'Выдать',
+        cancel: 'Отменить',
+        pending: 'В ожидании',
+        claimed: 'Выдан',
+        cancelled: 'Отменен'
+      }
+    }
+  }
 }
 
 const ro = {
@@ -100,7 +186,7 @@ const ro = {
     week2: 'Săptămâna 2',
     benefits: '5 atuuri',
     contact: 'Contact',
-    signup: 'Înscrie-te',
+    signup: 'Conectare Cont',
     navAria: 'Navigare principală',
     menuOpenAria: 'Deschide meniul',
     menuCloseAria: 'Închide meniul',
@@ -119,7 +205,7 @@ const ro = {
     factFormat: 'Format:',
     factFormatText: 'Fitness + Siguranță + Creativitate.',
     signup: 'Înscrie-te',
-    viewProgram: 'Vezi programul',
+    viewProgram: 'Clasament',
     booking: 'Rezervă loc:',
     addressLabel: 'Adresa:',
     sep: '|',
@@ -180,6 +266,92 @@ const ro = {
     limited: 'Locuri limitate',
     operator: 'Operator',
   },
+  gamification: {
+    login: {
+      title: 'Autentificare MARTS CAMP',
+      sub: 'Sistemul de gamificare al taberei',
+      user: 'Nume utilizator (Login)',
+      pass: 'Parolă (sau PIN)',
+      btn: 'Conectare',
+      error: 'Nume de utilizator sau parolă incorectă',
+      childHint: 'Copiii se conectează cu login (ex. child1) și codul PIN (ex. 1111)'
+    },
+    roles: {
+      admin: 'Super-admin',
+      counselor: 'Educator',
+      parent: 'Părinte',
+      child: 'Copil'
+    },
+    child: {
+      balance: 'Balanță coini',
+      ageGroup: 'Grupa',
+      history: 'Istoric realizări',
+      shop: 'Magazin premii',
+      reserve: 'Rezervă',
+      reserved: 'Rezervat',
+      noStock: 'Stoc epuizat',
+      successReserve: 'Produsul a fost rezervat cu succes! Ridică-l de la club.',
+      noCoins: 'Coini MARTS insuficienți!'
+    },
+    parent: {
+      title: 'Cabinet părinte',
+      childCoins: 'Balanță copil',
+      childHistory: 'Istoric acumulări',
+      childOrders: 'Premii rezervate',
+      noChildren: 'Nu aveți copii asociați cu contul dvs. Contactați administratorul.'
+    },
+    counselor: {
+      title: 'Cabinet educator',
+      allGroups: 'Toate grupele',
+      scouts: 'MARTS SCOUTS (5-8 ani)',
+      rangers: 'MARTS RANGERS (9-13 ani)',
+      awardTitle: 'Acordă coini',
+      selectChild: 'Selectați unul sau mai mulți copii din lista din stânga',
+      selectCriterion: 'Selectați criteriul de acordare:',
+      comment: 'Adăugați comentariu (ex. pentru ajutor la clasa de artă)',
+      awardBtn: 'Acordă coini',
+      success: 'Coinii au fost acordați cu succes!'
+    },
+    admin: {
+      title: 'Panou administrativ',
+      tabs: {
+        users: 'Utilizatori',
+        store: 'Magazin',
+        orders: 'Comenzi',
+        ledger: 'Tranzacții',
+        seller: 'Distribuire premii'
+      },
+      users: {
+        addBtn: 'Adaugă utilizator',
+        username: 'Login',
+        name: 'Nume',
+        role: 'Rol',
+        parent: 'Părinte',
+        group: 'Grupa',
+        actions: 'Acțiuni',
+        save: 'Salvează',
+        cancel: 'Anulează'
+      },
+      store: {
+        addBtn: 'Adaugă produs',
+        title: 'Denumire',
+        price: 'Preț (coini)',
+        stock: 'Stoc'
+      },
+      orders: {
+        child: 'Copil',
+        item: 'Premiu',
+        price: 'Preț',
+        status: 'Statut',
+        actions: 'Acțiuni',
+        approve: 'Eliberează',
+        cancel: 'Anulează',
+        pending: 'În așteptare',
+        claimed: 'Eliberat',
+        cancelled: 'Anulat'
+      }
+    }
+  }
 }
 
 /** @type {Record<Lang, typeof ru>} */
