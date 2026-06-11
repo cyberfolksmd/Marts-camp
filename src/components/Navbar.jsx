@@ -53,7 +53,7 @@ export default function Navbar() {
         </nav>
 
         <div className="navbar-actions">
-          <a className="btn-primary btn-primary--nav" href="#contact" onClick={closeMenu}>
+          <a className="btn-primary btn-primary--nav" href="/login" onClick={closeMenu}>
             {t('nav.signup')}
           </a>
           <button type="button" className="btn-lang" onClick={toggleLang} aria-label={t('langSwitchAria')}>

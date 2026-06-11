@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url'
 import pg from 'pg'
 import session from 'express-session'
 import XLSX from 'xlsx'
+import { seedDatabase, registerGamificationRoutes } from './server/gamification.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -422,6 +423,11 @@ app.get('/api/sales/export.xlsx', requireAdmin, requirePool, async (req, res) =>
   }
 })
 
+// Регистрация эндпоинтов геймификации
+if (pool) {
+  registerGamificationRoutes(app, pool)
+}
+
 app.use(express.static(path.join(__dirname, 'dist')))
 
 app.get('*', (req, res) => {
@@ -431,6 +437,11 @@ app.get('*', (req, res) => {
 if (pool) {
   pool.on('error', (err) => {
     console.error('pg pool', err)
+  })
+  seedDatabase(pool).then(() => {
+    console.log('Database seeding check done.')
+  }).catch((err) => {
+    console.error('Database seeding failed', err)
   })
 }
 
