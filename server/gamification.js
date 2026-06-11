@@ -20,129 +20,201 @@ export function verifyPassword(password, storedValue) {
 export async function seedDatabase(pool) {
   const client = await pool.connect()
   try {
+    await client.query('ALTER TABLE children_profiles DROP CONSTRAINT IF EXISTS children_profiles_coins_check')
+    await client.query('ALTER TABLE children_profiles ADD CONSTRAINT children_profiles_coins_check CHECK (coins >= -50)')
+
     // 1. Проверяем и заполняем критерии начисления
-    const criteriaCount = await client.query('SELECT COUNT(*) FROM earning_criteria')
-    if (parseInt(criteriaCount.rows[0].count, 10) === 0) {
-      console.log('Seeding earning criteria...')
+    console.log('Checking/seeding earning criteria...')
+    if (true) {
       const criteria = [
-        // Общие критерии
         {
-          title_ru: 'Хорошее поведение',
-          title_ro: 'Purtare bună',
-          desc_ru: 'За вежливость, дисциплину и позитивный настрой в лагере',
-          desc_ro: 'Pentru politețe, disciplină și atitudine pozitivă în tabără',
+          title_ru: 'Личный рекорд',
+          title_ro: 'Record personal',
+          desc_ru: 'За улучшение своего спортивного или творческого результата',
+          desc_ro: 'Pentru îmbunătățirea rezultatului personal sportiv sau creativ',
+          coins: 10,
+          cat: 'activity'
+        },
+        {
+          title_ru: 'Техника дня',
+          title_ro: 'Tehnica zilei',
+          desc_ru: 'За идеальное выполнение сложного упражнения или элемента',
+          desc_ro: 'Pentru executarea ideală a unui exercițiu sau element complex',
+          coins: 8,
+          cat: 'activity'
+        },
+        {
+          title_ru: 'Железная воля',
+          title_ro: 'Voință de fier',
+          desc_ru: 'За то, что проявил стойкость и не сдался на тяжелой тренировке',
+          desc_ro: 'Pentru perseverență și efort maxim la un antrenament dificil',
+          coins: 10,
+          cat: 'activity'
+        },
+        {
+          title_ru: 'Режим',
+          title_ro: 'Regim',
+          desc_ru: 'За быстрый подъем без лишних напоминаний и вовремя сданный телефон',
+          desc_ro: 'Pentru trezire rapidă fără mementouri și predarea la timp a telefonului',
           coins: 5,
           cat: 'behavior'
         },
         {
-          title_ru: 'Помощь другу',
-          title_ro: 'Ajutor prietenesc',
-          desc_ru: 'Помощь товарищам по лагерю или вожатым',
-          desc_ro: 'Ajutarea colegilor de tabără sau a educatorilor',
-          coins: 7,
-          cat: 'help'
-        },
-        {
-          title_ru: 'Порядок и чистота',
-          title_ro: 'Ordine și curățenie',
-          desc_ru: 'За уборку рабочего места после Арт-класса или обеда',
-          desc_ro: 'Pentru curățarea locului de muncă după clasa de artă sau prânz',
+          title_ru: 'Пунктуальность',
+          title_ro: 'Punctualitate',
+          desc_ru: 'За приход на тренировку или сбор вовремя',
+          desc_ro: 'Pentru sosirea la timp la antrenament sau adunare',
           coins: 3,
           cat: 'behavior'
         },
         {
-          title_ru: 'Фитнес-активность',
-          title_ro: 'Activitate fitness',
-          desc_ru: 'За усердие на тренировках, эстафетах и квестах',
-          desc_ro: 'Pentru diligență la antrenamente, ștafete și quest-uri',
+          title_ru: 'Помощь тренеру',
+          title_ro: 'Ajutorul antrenorului',
+          desc_ru: 'За сбор инвентаря после занятия или помощь в организации',
+          desc_ro: 'Pentru strângerea echipamentului după antrenament sau ajutor la organizare',
+          coins: 5,
+          cat: 'help'
+        },
+        {
+          title_ru: 'Друг команды',
+          title_ro: 'Prietenul echipei',
+          desc_ru: 'За поддержку товарища по команде, который расстроился из-за проигрыша',
+          desc_ro: 'Pentru susținerea unui coechipier întristat de înfrângere',
+          coins: 7,
+          cat: 'help'
+        },
+        {
+          title_ru: 'Zero Waste',
+          title_ro: 'Fără deșeuri',
+          desc_ru: 'За уборку мусора (даже чужого) на территории лагеря',
+          desc_ro: 'Pentru strângerea gunoiului (chiar și străin) pe teritoriul taberei',
+          coins: 5,
+          cat: 'behavior'
+        },
+        {
+          title_ru: 'Чистые ладошки',
+          title_ro: 'Mâini curate',
+          desc_ru: 'За мытье рук перед едой без напоминания вожатого',
+          desc_ro: 'Pentru spălarea mâinilor înainte de masă fără memento-ul educatorului',
+          coins: 3,
+          cat: 'behavior'
+        },
+        {
+          title_ru: 'Поделился с другом',
+          title_ro: 'Împărtășit cu un prieten',
+          desc_ru: 'За проявление доброты (поделился игрушкой, помог подняться и т.д.)',
+          desc_ro: 'Pentru manifestarea bunătății (împărtășirea unei jucării, ajutor la ridicare)',
+          coins: 5,
+          cat: 'help'
+        },
+        {
+          title_ru: 'Слушаю во все уши',
+          title_ro: 'Ascult cu atenție',
+          desc_ru: 'Ни разу не отвлекся, пока тренер или вожатый объясняли задание',
+          desc_ro: 'Nu s-a distras deloc în timp ce antrenorul sau educatorul explica sarcina',
+          coins: 5,
+          cat: 'behavior'
+        },
+        {
+          title_ru: 'Железная дисциплина',
+          title_ro: 'Disciplină de fier',
+          desc_ru: 'Сдал телефон вовремя и без напоминаний вожатого (+5 коинов ежедневно)',
+          desc_ro: 'Predarea telefonului la timp și fără mementouri de la educator (+5 coini zilnic)',
+          coins: 5,
+          cat: 'behavior'
+        },
+        {
+          title_ru: 'Тайм-менеджмент',
+          title_ro: 'Time management',
+          desc_ru: 'Ни одного опоздания на построение за весь день',
+          desc_ro: 'Nicio întârziere la aliniere pe parcursul întregii zile',
+          coins: 5,
+          cat: 'behavior'
+        },
+        {
+          title_ru: 'Капитанская помощь',
+          title_ro: 'Ajutor de căpitan',
+          desc_ru: 'Помог тренеру собрать/разложить сложный инвентарь (мячи, фишки)',
+          desc_ro: 'A ajutat antrenorul să strângă/aranjeze echipamentul complex (mingi, jaloane)',
+          coins: 7,
+          cat: 'help'
+        },
+        {
+          title_ru: 'Чистый сектор',
+          title_ro: 'Sector curat',
+          desc_ru: 'Идеальный порядок в комнате при проверке вожатым',
+          desc_ro: 'Ordine ideală în cameră la verificarea de către educator',
+          coins: 5,
+          cat: 'behavior'
+        },
+        {
+          title_ru: 'Рекорд смены',
+          title_ro: 'Recordul turei',
+          desc_ru: 'Лучший результат в тесте смены (планка, бег или чеканка мяча)',
+          desc_ro: 'Cel mai bun rezultat la testul turei (planșă, alergare sau jonglat mingea)',
+          coins: 15,
+          cat: 'activity'
+        },
+        {
+          title_ru: 'Анти-конфликт',
+          title_ro: 'Anti-conflict',
+          desc_ru: 'Умение договориться и решить спор в команде без криков и ссор',
+          desc_ro: 'Abilitatea de a negocia și rezolva o dispută în echipă fără strigăte sau ceartă',
+          coins: 8,
+          cat: 'behavior'
+        },
+        {
+          title_ru: 'Зрительская поддержка',
+          title_ro: 'Susținerea spectatorilor',
+          desc_ru: 'Активнее всех болел за свою команду во время соревнований',
+          desc_ro: 'A susținut cel mai activ echipa sa în timpul competițiilor',
           coins: 5,
           cat: 'activity'
         },
-        // Неделя 1
         {
-          title_ru: 'Гений головоломок (Пн, Н1)',
-          title_ro: 'Geniul puzzle-urilor (Lu, S1)',
-          desc_ru: 'Успешное прохождение логического квеста и решение загадок',
-          desc_ro: 'Finalizarea cu succes a quest-ului logic și rezolvarea ghicitorilor',
-          coins: 8,
-          cat: 'theme_task'
+          title_ru: 'Нецензурная лексика (Штраф)',
+          title_ro: 'Limbaj licențios (Penalizare)',
+          desc_ru: 'Штраф за использование нецензурных слов и выражений',
+          desc_ro: 'Penalizare pentru utilizarea cuvintelor obscene',
+          coins: -5,
+          cat: 'fine'
         },
         {
-          title_ru: 'Креативный монстр (Вт, Н1)',
-          title_ro: 'Monstru creativ (Ma, S1)',
-          desc_ru: 'Создание самой оригинальной «Страшной короны» или билета',
-          desc_ro: 'Crearea celei mai originale „Coroane înfricoșătoare” sau carnet',
-          coins: 8,
-          cat: 'art'
+          title_ru: 'Нарушение дисциплины (Штраф)',
+          title_ro: 'Abatere disciplinară (Penalizare)',
+          desc_ru: 'Штраф за игнорирование правил лагеря или указаний вожатого',
+          desc_ro: 'Penalizare pentru ignorarea regulilor sau a educatorului',
+          coins: -5,
+          cat: 'fine'
         },
         {
-          title_ru: 'Мастер Шеф (Ср, Н1)',
-          title_ro: 'Master Chef (Mi, S1)',
-          desc_ru: 'Отличные кулинарные навыки при приготовлении торта Тирамису',
-          desc_ro: 'Abilități culinare excelente la prepararea tortului Tiramisu',
-          coins: 10,
-          cat: 'art'
-        },
-        {
-          title_ru: 'Храбрый Скаут (Чт, Н1)',
-          title_ro: 'Scout curajos (Jo, S1)',
-          desc_ru: 'Усвоение приёмов самообороны и пиратских тактик',
-          desc_ro: 'Însușirea tehnicilor de autoapărare și tacticilor de pirați',
-          coins: 8,
-          cat: 'activity'
-        },
-        {
-          title_ru: 'Звезда экрана (Пт, Н1)',
-          title_ro: 'Vedetă de ecran (Vi, S1)',
-          desc_ru: 'Активное участие в съёмках ролика «Твой звездный час»',
-          desc_ro: 'Participare activă la filmarea clipului „Momentul tău de vedetă”',
-          coins: 12,
-          cat: 'theme_task'
-        },
-        // Неделя 2
-        {
-          title_ru: 'Выживший в Джуманджи (Пн, Н2)',
-          title_ro: 'Supraviețuitor în Jumanji (Lu, S2)',
-          desc_ru: 'Успешное прохождение полосы препятствий и тренировки выживания',
-          desc_ro: 'Finalizarea cu succes a traseului cu obstacole și antrenamentului',
-          coins: 10,
-          cat: 'activity'
-        },
-        {
-          title_ru: 'Безумный Шляпник (Вт, Н2)',
-          title_ro: 'Pălărierul Nebun (Ma, S2)',
-          desc_ru: 'Создание цилиндра кролика или «живых карт»',
-          desc_ro: 'Crearea cilindrului de iepure sau a „hărților vii”',
-          coins: 8,
-          cat: 'art'
-        },
-        {
-          title_ru: 'Офицер Зверополиса (Ср, Н2)',
-          title_ro: 'Ofițer Zootopia (Mi, S2)',
-          desc_ru: 'Изучение правил безопасности в городе и сложных перекрёстков',
-          desc_ro: 'Studierea regulilor de siguranță în oraș și traversărilor dificile',
-          coins: 10,
-          cat: 'theme_task'
-        },
-        {
-          title_ru: 'Юный Волшебник (Чт, Н2)',
-          title_ro: 'Tânăr Vrăjitor (Jo, S2)',
-          desc_ru: 'Приготовление волшебного зелья или победа в Квиддич',
-          desc_ro: 'Prepararea poțiunii magice sau victorie la Quidditch',
-          coins: 8,
-          cat: 'theme_task'
+          title_ru: 'Неспортивное поведение (Штраф)',
+          title_ro: 'Comportament nesportiv (Penalizare)',
+          desc_ru: 'Штраф за буллинг, грубость или неуважение к соперникам и товарищам',
+          desc_ro: 'Penalizare pentru bullying, grosolănie sau lipsă de respect',
+          coins: -5,
+          cat: 'fine'
         }
       ]
 
+      // Удаляем все старые критерии, которых нет в новом списке
+      const allowedTitles = criteria.map(c => c.title_ru)
+      await client.query(
+        'DELETE FROM earning_criteria WHERE title_ru NOT IN (' + allowedTitles.map((_, i) => `$${i + 1}`).join(', ') + ')',
+        allowedTitles
+      )
+
       for (const item of criteria) {
-        await client.query(
-          `INSERT INTO earning_criteria (title_ru, title_ro, description_ru, description_ro, default_coins, category)
-           VALUES ($1, $2, $3, $4, $5, $6)`,
-          [item.title_ru, item.title_ro, item.desc_ru, item.desc_ro, item.coins, item.cat]
-        )
+        const checkRes = await client.query('SELECT id FROM earning_criteria WHERE title_ru = $1', [item.title_ru])
+        if (checkRes.rows.length === 0) {
+          await client.query(
+            `INSERT INTO earning_criteria (title_ru, title_ro, description_ru, description_ro, default_coins, category)
+             VALUES ($1, $2, $3, $4, $5, $6)`,
+            [item.title_ru, item.title_ro, item.desc_ru, item.desc_ro, item.coins, item.cat]
+          )
+        }
       }
     }
-
     // 2. Проверяем и заполняем пользователей
     const usersCount = await client.query('SELECT COUNT(*) FROM users')
     if (parseInt(usersCount.rows[0].count, 10) === 0) {
@@ -199,9 +271,8 @@ export async function seedDatabase(pool) {
     }
 
     // 3. Проверяем и заполняем витрину товаров
-    const storeCount = await client.query('SELECT COUNT(*) FROM store_items')
-    if (parseInt(storeCount.rows[0].count, 10) === 0) {
-      console.log('Seeding default store items...')
+    console.log('Checking/seeding default store items...')
+    if (true) {
       const items = [
         { title_ru: 'Браслет MARTS', title_ro: 'Brățară MARTS', price: 30, stock: 50 },
         { title_ru: 'Бутылка для воды', title_ro: 'Sticlă de apă', price: 80, stock: 20 },
@@ -212,11 +283,14 @@ export async function seedDatabase(pool) {
       ]
 
       for (const item of items) {
-        await client.query(
-          `INSERT INTO store_items (title_ru, title_ro, price, stock)
-           VALUES ($1, $2, $3, $4)`,
-          [item.title_ru, item.title_ro, item.price, item.stock]
-        )
+        const checkRes = await client.query('SELECT id FROM store_items WHERE title_ru = $1', [item.title_ru])
+        if (checkRes.rows.length === 0) {
+          await client.query(
+            `INSERT INTO store_items (title_ru, title_ro, price, stock)
+             VALUES ($1, $2, $3, $4)`,
+            [item.title_ru, item.title_ro, item.price, item.stock]
+          )
+        }
       }
     }
   } catch (err) {
@@ -356,7 +430,19 @@ export function registerGamificationRoutes(app, pool) {
         throw new Error('Criterion not found')
       }
       const crit = critRes.rows[0]
-      const amount = Number(customAmount) || crit.default_coins
+      
+      let amount = crit.default_coins
+      if (customAmount !== undefined && customAmount !== null && customAmount !== '') {
+        const val = Number(customAmount)
+        if (!isNaN(val)) {
+          amount = val
+        }
+      }
+
+      // Если это штраф (дефолтное значение отрицательное или категория 'fine'), то сумма списания должна быть отрицательной
+      if ((crit.default_coins < 0 || crit.category === 'fine') && amount > 0) {
+        amount = -amount
+      }
 
       // Начисляем каждому ребенку
       for (const profileId of childProfileIds) {
@@ -367,10 +453,10 @@ export function registerGamificationRoutes(app, pool) {
           [profileId, req.session.userId, amount, criterionId, description || null]
         )
 
-        // Обновляем баланс в профиле ребенка
+        // Обновляем баланс в профиле ребенка (с защитой от ухода в глубокий минус, лимит -50)
         await client.query(
           `UPDATE children_profiles 
-           SET coins = coins + $1 
+           SET coins = GREATEST(-50, coins + $1) 
            WHERE id = $2`,
           [amount, profileId]
         )
@@ -382,6 +468,60 @@ export function registerGamificationRoutes(app, pool) {
       await client.query('ROLLBACK')
       console.error('Award error:', err)
       return res.status(500).json({ error: err.message || 'Server error' })
+    } finally {
+      client.release()
+    }
+  })
+
+  // Пакетное начисление за ежедневный чек-лист
+  app.post('/api/gamification/counselor/daily-checklist', requireRole(['counselor', 'admin']), async (req, res) => {
+    const { awards } = req.body
+    if (!awards || !Array.isArray(awards)) {
+      return res.status(400).json({ error: 'Missing awards array' })
+    }
+
+    const client = await pool.connect()
+    try {
+      await client.query('BEGIN')
+
+      // Получаем карту всех критериев для быстрого маппинга
+      const critRes = await client.query('SELECT * FROM earning_criteria')
+      const criteriaMap = {}
+      for (const row of critRes.rows) {
+        criteriaMap[row.id] = row
+      }
+
+      for (const award of awards) {
+        const { childProfileId, criterionId } = award
+        if (!childProfileId || !criterionId) continue
+
+        const crit = criteriaMap[criterionId]
+        if (!crit) continue
+
+        const amount = crit.default_coins
+
+        // Добавляем запись в транзакции
+        await client.query(
+          `INSERT INTO coin_transactions (child_profile_id, counselor_id, amount, criterion_id, description)
+           VALUES ($1, $2, $3, $4, $5)`,
+          [childProfileId, req.session.userId, amount, criterionId, 'Чек-лист дня / Checklist zilnic']
+        )
+
+        // Обновляем баланс в профиле ребенка
+        await client.query(
+          `UPDATE children_profiles 
+           SET coins = GREATEST(-50, coins + $1) 
+           WHERE id = $2`,
+          [amount, childProfileId]
+        )
+      }
+
+      await client.query('COMMIT')
+      return res.json({ success: true })
+    } catch (err) {
+      await client.query('ROLLBACK')
+      console.error('Daily checklist error:', err)
+      return res.status(500).json({ error: 'Database error' })
     } finally {
       client.release()
     }
